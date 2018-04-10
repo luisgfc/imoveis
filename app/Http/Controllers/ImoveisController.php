@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Model\Imoveis;
 use File;
 use Illuminate\Support\Facades\Input;
+ini_set('max_execution_time', 300);
 
 class ImoveisController extends Controller
 {
