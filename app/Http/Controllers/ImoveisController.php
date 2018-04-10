@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -94,7 +93,7 @@ class ImoveisController extends Controller
         if(!$imoveis){
             abort(404);
         }
-        return view('imoveis.edit')->with('detailpage', $imoveis);
+        return view('admin.imoveis.edit')->with('detailpage', $imoveis);
     }
 
     public function update(Request $request, $id)
@@ -119,7 +118,7 @@ class ImoveisController extends Controller
             'qt_banheiros' => 'required',
             'qt_salas' => 'required',
             'qt_garagem' => 'required',
-            'descricao' => 'descricao',
+            'descricao' => 'required',
         ]);
         
         $imoveis = Imoveis::find($id);
@@ -181,5 +180,44 @@ class ImoveisController extends Controller
     	$data = $request->all();
     	$imoveis = $imovel->search($data);
     	return view('admin.imoveis.index',compact('imoveis',$imoveis));
+    }
+
+    public function import(){
+        return view('admin.imoveis.import');
+    }
+
+    public function importImoveis(Request $request){
+        $link = $request->url;
+        $xml = simplexml_load_file($link, 'SimpleXMLElement', LIBXML_NOCDATA )->Imoveis;
+        foreach($xml->Imovel as $item){
+            echo $item->CodigoImovel;
+            $imoveis = new Imoveis;
+            $imoveis->codigo_imovel = $item->CodigoImovel;
+            $imoveis->tipo_imovel = $item->TipoImovel;
+            $imoveis->titulo_imovel = $item->titulo_imovel;
+            $imoveis->cep = $item->CEP;
+            $imoveis->cidade = $item->Cidade;
+            $imoveis->bairro = $item->Bairro;
+            $imoveis->estado = $item->UF;
+            $imoveis->numero = $item->Numero;
+            $imoveis->rua = $item->rua;
+            $imoveis->complemento = $item->Complemento;
+            $imoveis->valor_venda = $item->PrecoVenda;
+            $imoveis->valor_venda = str_replace(".", "", $imoveis->valor_venda);
+            $imoveis->valor_locacao = $item->PrecoLocacao;
+            $imoveis->valor_locacao = str_replace(".", "", $imoveis->valor_locacao);
+            $imoveis->valor_temporada = $item->PrecoLocacaoTemporada;
+            $imoveis->valor_temporada = str_replace(".", "", $imoveis->valor_temporada);
+            $imoveis->area = $item->AreaTotal;
+            $imoveis->area = str_replace("", "", $imoveis->area);
+            $imoveis->qt_dormitorios = $item->QtdDormitorios;
+            $imoveis->qt_suites = $item->QtdSuites;
+            $imoveis->qt_banheiros = $item->QtdBanheiros;
+            $imoveis->qt_salas = $item->QtdSalas;
+            $imoveis->qt_garagem = $item->QtdVagas;
+            $imoveis->descricao = $item->DescricaoLocalizacao;
+            $imoveis->save();
+        }
+        return redirect('admin/imoveis');
     }
 }

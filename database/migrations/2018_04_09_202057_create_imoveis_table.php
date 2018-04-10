@@ -24,7 +24,7 @@ class CreateImoveisTable extends Migration
             $table->string('estado', 50);
             $table->string('rua', 50);
             $table->string('numero', 20);
-            $table->string('complemento', 20);
+            $table->string('complemento', 100);
             $table->decimal('valor_venda', 20, 2);
             $table->decimal('valor_locacao', 20, 2);
             $table->decimal('valor_temporada', 20, 2);

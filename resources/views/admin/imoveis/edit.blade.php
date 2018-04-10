@@ -1,16 +1,13 @@
 @extends('adminlte::page')
 
 @section('content_header')
-    <h1>Imóveis</h1>
+    <h1>Editar Imóvel</h1>
 @stop
 
 @section('content')
     <div class="box">
-    	<div class="box-header">
-    		Cadastrar Imóvel
-    	</div>
     	<div class="box-body">
-    		<form class="" action="/imoveis/{{ $detailpage->id }}"" enctype="multipart/form-data" method="post">
+    		<form class="" action="{{route('imovel.update', ['id' => $detailpage->id] )}}" enctype="multipart/form-data" method="post">
     			<input type="hidden" name="_method" value="put">
     			<div class="row">
     				<div class="col-md-6">
@@ -126,8 +123,9 @@
 
     					<div class="form-group">
     						<label for="descricao">Descrição do imóvel:</label>
-    						<textarea class="form-control" name="descricao" id="descricao" required></textarea>
+    						<textarea class="form-control" name="descricao" id="descricao" required>{{ $detailpage->descricao }} </textarea>
     					</div>
+
     				</div>
     			</div>
     			<div class="row">

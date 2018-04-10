@@ -1,14 +1,11 @@
 @extends('adminlte::page')
 
 @section('content_header')
-    <h1>Imóveis</h1>
+    <h1>Cadastrar Imóvel</h1>
 @stop
 
 @section('content')
     <div class="box">
-    	<div class="box-header">
-    		Cadastrar Imóvel
-    	</div>
     	<div class="box-body">
     		<form class="" action="{{route('imovel.store')}}" enctype="multipart/form-data" method="POST">
     			<div class="row">
@@ -139,8 +136,6 @@
     	</div>
     </div>
 @stop
-
-
 
 @section('js')
     <!-- Adicionando JQuery -->

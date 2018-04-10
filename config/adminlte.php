@@ -108,12 +108,18 @@ return [
     */
 
     'menu' => [
-        'MENU',
+        //'MENU',
         [
             'text'        => 'Imoveis',
             'url'         => 'admin/imoveis',
             'icon'        => 'home',
         ],
+        [
+            'text'        => 'Importar Imóveis',
+            'url'         => 'admin/import',
+            'icon'        => 'download',  
+        ],
+
     ],
 
     /*

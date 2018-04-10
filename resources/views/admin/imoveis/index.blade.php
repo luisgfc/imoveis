@@ -21,37 +21,69 @@
             </div>
     	</div>
     	<div class="box-body">
-    		<table  class="table table-bordered table-hover dataTable">
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Titulo</th>
-                        <th>Tipo</th>
-                        <th>Cidade</th>
-                        <th>Estado</th>
-                        <th colspan="2"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($imoveis as $imovel)
-                    <tr>
-                        <td>{{ $imovel->codigo_imovel }}</a></td>
-                        <td>{{ $imovel->titulo_imovel }}</td>
-                        <td>{{ $imovel->tipo_imovel }}</td>
-                        <td>{{ $imovel->cidade }}</td>
-                        <td>{{ $imovel->estado }}</td>
-                        <td><a href="{{route('imovel.edit', $imovel->id )}}" class="btn btn-warning">Editar</a></td>
-                        <td>
-                        <form action="{{route( 'imovel.destroy', $imovel->id) }}" method="POST">
-                            <input type="hidden" name="_method" value="delete">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <input type="submit" class="btn btn-danger" name="name" value="Apagar">
-                        </form>
-                        </td>
-                    <tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <div class="table-responsive">
+        		<table  class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Titulo</th>
+                            <th>Tipo</th>
+                            <th>CEP</th>
+                            <th>Cidade</th>
+                            <th>Bairro</th>
+                            <th>Estado</th>
+                            <th>Rua</th>
+                            <th>Número</th>
+                            <th>Complemento</th>
+                            <th>Preço</th>
+                            <th>Aluguel</th>
+                            <th>Temporada</th>
+                            <th>Área</th>
+                            <th>Dormitórios</th>
+                            <th>Suítes</th>
+                            <th>Banheiros</th>
+                            <th>Salas</th>
+                            <th>Garagens</th>
+                            <th>Descrição</th>
+                            <th colspan="2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($imoveis as $imovel)
+                        <tr>
+                            <td>{{ $imovel->codigo_imovel }}</a></td>
+                            <td>{{ $imovel->titulo_imovel }}</td>
+                            <td>{{ $imovel->tipo_imovel }}</td>
+                            <td>{{ $imovel->cep }}</td>
+                            <td>{{ $imovel->cidade }}</td>
+                            <td>{{ $imovel->bairro }}</td>
+                            <td>{{ $imovel->estado }}</td>
+                            <td>{{ $imovel->rua }}</td>
+                            <td>{{ $imovel->numero }}</td>
+                            <td>{{ $imovel->complemento }}</td>
+                            <td>{{ $imovel->valor_venda }}</td>
+                            <td>{{ $imovel->valor_locacao }}</td>
+                            <td>{{ $imovel->valor_temporada }}</td>
+                            <td>{{ $imovel->area }}</td>
+                            <td>{{ $imovel->qt_dormitorios }}</td>
+                            <td>{{ $imovel->qt_suites }}</td>
+                            <td>{{ $imovel->qt_banheiros }}</td>
+                            <td>{{ $imovel->qt_salas }}</td>
+                            <td>{{ $imovel->qt_garagem }}</td>
+                            <td>{{ $imovel->descricao }}</td>
+                            <td><a href="{{ route('imovel.edit', ['id' => $imovel->id]) }}" class="btn btn-warning">Editar</a></td>
+                            <td>
+                            <form action="{{ route('imovel.destroy', ['id' => $imovel->id]) }}" method="POST">
+                                <input type="hidden" name="_method" value="delete">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="submit" class="btn btn-danger" name="name" value="Apagar">
+                            </form>
+                            </td>
+                        @endforeach
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             {!! $imoveis->links() !!}
     	</div>
     </div>

@@ -12,4 +12,5 @@ class Imoveis extends Model
     			$query->where('codigo_imovel', $data['codigo']);
     	})->paginate();
     }
+
 }
